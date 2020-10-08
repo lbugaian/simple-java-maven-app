@@ -37,9 +37,9 @@ pipeline {
                             }
 
                             steps {
-                                echo '=== Building simple-java-maven-app Docker Image ==='
+                                echo '=== Building Java-maven-app Docker Image ==='
                                 script {
-                                    app = docker.build("rpidugu/simple-java-maven-app")
+                                    app = docker.build("leonidbugaian/Java-maven-app")
                                 }
                             }
                 }
@@ -48,7 +48,7 @@ pipeline {
                                 branch 'master'
                             }
                             steps {
-                                echo '=== Pushing simple-java-maven-app Docker Image ==='
+                                echo '=== Pushing Java-maven-app Docker Image ==='
                                 script {
                                     GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
                                     SHORT_COMMIT = "${GIT_COMMIT_HASH[0..7]}"
@@ -62,8 +62,8 @@ pipeline {
                 stage('Remove local images') {
                             steps {
                                 echo '=== Delete the local docker images ==='
-                                sh("docker rmi -f rpidugu/simple-java-maven-app:latest || :")
-                                sh("docker rmi -f rpidugu/simple-java-maven-app:$SHORT_COMMIT || :")
+                                sh("docker rmi -f leonidbugaian/Java-maven-app:latest || :")
+                                sh("docker rmi -f leonidbugaian/Java-maven-app:$SHORT_COMMIT || :")
                 }
             }
     }
